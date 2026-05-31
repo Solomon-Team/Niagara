@@ -24,6 +24,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * <h2>JS→Java</h2>
  * JavaScript calls {@code niagara.emit(event, jsonString)} which invokes a Java-backed
  * {@link JSFunction}, dispatching to listeners registered via {@link #on(String, EventListener)}.
+ *
+ * @author Ayydxn
  */
 public class EventBridge
 {

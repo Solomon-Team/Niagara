@@ -7,11 +7,11 @@ import me.ayydxn.luminescence.platform.impl.StandardULFileSystem;
 import me.ayydxn.luminescence.platform.impl.StandardULFontLoader;
 import me.ayydxn.luminescence.renderer.ULRenderer;
 import me.ayydxn.niagara.NiagaraClientMod;
+import me.ayydxn.niagara.platform.NiagaraGPUDriver;
 import me.ayydxn.niagara.platform.NiagaraLogger;
 import me.ayydxn.niagara.utils.NiagaraPaths;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.Monitor;
-import net.minecraft.client.util.Window;
 import org.lwjgl.glfw.GLFWVidMode;
 
 import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
@@ -22,9 +22,13 @@ public class NiagaraEngine
     private static NiagaraEngine INSTANCE;
 
     private final ULRenderer renderer;
+    private final NiagaraGPUDriver gpuDriver;
 
     private NiagaraEngine()
     {
+        this.gpuDriver = new NiagaraGPUDriver();
+
+        ULPlatform.setGPUDriver(this.gpuDriver);
         ULPlatform.setFileSystem(new StandardULFileSystem());
         ULPlatform.setFontLoader(new StandardULFontLoader());
         ULPlatform.setLogger(new NiagaraLogger());
@@ -70,6 +74,7 @@ public class NiagaraEngine
             return;
 
         this.renderer.destroy();
+        this.gpuDriver.shutdown();
 
         INSTANCE = null;
     }
@@ -91,5 +96,10 @@ public class NiagaraEngine
             throw new IllegalStateException("Tried to access Niagara's backend Ultralight engine before it was available!");
 
         return INSTANCE;
+    }
+
+    public NiagaraGPUDriver getGPUDriver()
+    {
+        return this.gpuDriver;
     }
 }
