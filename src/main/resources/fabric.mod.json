@@ -15,6 +15,9 @@
 	"icon": "assets/niagara/icon.png",
 	"environment": "*",
 	"entrypoints": {
+		"preLaunch": [
+			"me.ayydxn.niagara.NiagaraPreLaunchEntrypoint"
+		],
 		"client": [
 			"me.ayydxn.niagara.NiagaraClientMod"
 		]

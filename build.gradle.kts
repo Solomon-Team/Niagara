@@ -33,6 +33,9 @@ dependencies {
 	// Luminesecnce
 	implementationAndInclude("io.github.ayydxn:luminescence:${providers.gradleProperty("luminescence_version").get()}")
 	implementationAndInclude("io.github.ayydxn:luminescence::natives-windows-x64")
+
+	// Utility Libraries
+	implementationAndInclude("org.tukaani:xz:${providers.gradleProperty("xz_version").get()}")
 }
 
 tasks.processResources {
@@ -49,6 +52,10 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 java {
+	toolchain {
+		languageVersion.set(JavaLanguageVersion.of(17))
+	}
+
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.
 	// If you remove this line, sources will not be generated.
