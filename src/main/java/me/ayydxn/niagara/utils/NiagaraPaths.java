@@ -8,4 +8,5 @@ public class NiagaraPaths
 {
     public static final Path NIAGARA_DIRECTORY = FabricLoader.getInstance().getGameDir().resolve("niagara");
     public static final Path NIAGARA_RESOURCES_DIRECTORY = NIAGARA_DIRECTORY.resolve("resources");
+    public static final Path NIAGARA_CACHE_DIRECTORY = NIAGARA_DIRECTORY.resolve("cache");
 }
